@@ -1,6 +1,4 @@
 (function () {
-
-
     // module buffer
     var modules = {};
 
@@ -62,7 +60,7 @@
                 delete moduleFns[name];
             }
         }
-    };
+    }
 
     function use(mod, cb) {
         var list;

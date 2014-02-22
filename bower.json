@@ -5,9 +5,9 @@
     "**/.*",
     "node_modules",
     "lib",
-    "spec",
+    "spec"
   ],
   "dependencies": {
-    "jasmine": "latest"
+    "jQuery": "latest"
   }
 }

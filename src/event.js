@@ -1,10 +1,10 @@
-﻿blueos.module('core.event', function (exports, require, module) {
+﻿ferret.module('core.event', function (exports, require, module) {
     var console = require('core.console');
 
     var events = {};
 
     function listen(event, cb) {
-        if (blueos.isNonEmptyString(event)) {
+        if (ferret.isNonEmptyString(event)) {
             if (events[event]) {
                 events[event].push(cb);
             } else {
@@ -16,7 +16,7 @@
     }
 
     function trigger(event) {
-        if (blueos.isNonEmptyString(event)) {
+        if (ferret.isNonEmptyString(event)) {
             var args = Array.prototype.slice.call(arguments, 1);
             doTrigger(event, args);
         } else {
@@ -28,7 +28,7 @@
         var callbacks = events[name];
 
         if (callbacks) {
-            blueos.forEach(callbacks, function (cb) {
+            ferret.forEach(callbacks, function (cb) {
                 cb.apply(null, args);
             });
         }

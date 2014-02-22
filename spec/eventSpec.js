@@ -1,6 +1,6 @@
 ﻿describe('event', function () {
     afterEach(function () {
-        blueos.use('core.event', function (event) {
+        ferret.use('core.event', function (event) {
             event.clear();
         });
     });
@@ -9,7 +9,7 @@
         var fooHandler = jasmine.createSpy('fooHandler');
         var barHandler = jasmine.createSpy('barHandler');
 
-        blueos.use('core.event', function (event) {
+        ferret.use('core.event', function (event) {
             event.listen('changed', fooHandler);
             event.listen('changed', barHandler);
 
@@ -21,7 +21,7 @@
     });
 
     it('should throw exception when trigger event name is not string', function () {
-        blueos.use('core.event', function (event) {
+        ferret.use('core.event', function (event) {
             expect(function () {
                 event.trigger({});
             }).toThrow();
@@ -29,7 +29,7 @@
     });
 
     it('should throw exception when listen event name is not string', function () {
-        blueos.use('core.event', function (event) {
+        ferret.use('core.event', function (event) {
             expect(function () {
                 event.listen({});
             }).toThrow();

@@ -1,5 +1,5 @@
 (function () {
-    
+
 
     // module buffer
     var modules = {};
@@ -9,11 +9,11 @@
 
     // create a new module
     function module(name, cb) {
-        if (!blueos.isString(name)) {
+        if (!ferret.isString(name)) {
             console.error('module name should be a string:', name);
         }
 
-        if (!blueos.isFunction(cb)) {
+        if (!ferret.isFunction(cb)) {
             console.error('module consructor should be a function:', name);
         }
 
@@ -30,7 +30,7 @@
             result = loadModule(name);
         }
 
-        if (blueos.isFunction(cb)) {
+        if (ferret.isFunction(cb)) {
             cb(result);
         }
 
@@ -55,7 +55,7 @@
         console.log('remove module', name);
         cacheOnly = (cacheOnly === 'cache' ? true : false);
 
-        if (blueos.isString(name)) {
+        if (ferret.isString(name)) {
             delete modules[name];
 
             if (!cacheOnly) {
@@ -66,30 +66,30 @@
 
     function use(mod, cb) {
         var list;
-        if (blueos.isArray(mod)) {
+        if (ferret.isArray(mod)) {
             list = mod;
-        } else if (blueos.isString(mod)) {
+        } else if (ferret.isString(mod)) {
             list = [mod];
         } else {
             throw 'first parameter of `use` should be an array or string';
         }
 
         var result = [];
-        blueos.forEach(list, function (name) {
-            if (blueos.isNonEmptyString(name)) {
+        ferret.forEach(list, function (name) {
+            if (ferret.isNonEmptyString(name)) {
                 result.push(require(name));
             }
         });
 
-        if (blueos.isFunction(cb)) {
-            cb.apply(blueos, result);
+        if (ferret.isFunction(cb)) {
+            cb.apply(ferret, result);
         }
     }
 
-    var blueos = window.blueos = window.blueos || {};
+    var ferret = window.ferret = window.ferret || {};
 
-    blueos.module = module;
-    blueos.use = use;
-    blueos.require = require;
-    blueos.removeModule = removeModule;
+    ferret.module = module;
+    ferret.use = use;
+    ferret.require = require;
+    ferret.removeModule = removeModule;
 }());

@@ -63,14 +63,14 @@
 
     function noop() { };
 
-    var blueos = window.blueos = window.blueos || {};
+    var ferret = window.ferret = window.ferret || {};
 
-    blueos.isArray = isArray;
-    blueos.isString = isString;
-    blueos.isDate = isDate;
-    blueos.isFunction = isFunction;
-    blueos.isObject = isObject;
-    blueos.isNonEmptyString = isNonEmptyString;
-    blueos.forEach = forEach;
-    blueos.noop = noop;
+    ferret.isArray = isArray;
+    ferret.isString = isString;
+    ferret.isDate = isDate;
+    ferret.isFunction = isFunction;
+    ferret.isObject = isObject;
+    ferret.isNonEmptyString = isNonEmptyString;
+    ferret.forEach = forEach;
+    ferret.noop = noop;
 }());

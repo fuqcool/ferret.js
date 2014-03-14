@@ -82,6 +82,7 @@
   ferret.isObject = isObject;
   ferret.isNumber = isNumber;
   ferret.isNonEmptyString = isNonEmptyString;
+  ferret.type = type;
 
   ferret.forEach = forEach;
   ferret.noop = noop;

@@ -1,28 +1,34 @@
 ﻿(function () {
-  var toString = function (obj) {
-    return Object.prototype.toString.call(obj);
+  var type = function (o) {
+    if (o === null) {
+      return 'null';
+    } else if (o === undefined) {
+      return 'undefined';
+    } else if (typeof o === 'object') {
+      return _type(o);
+    } else {
+      return typeof o;
+    }
+
+    function _type(o) {
+      var typeStr = Object.prototype.toString.apply(o);
+      return typeStr.slice(8, -1).toLowerCase();
+    }
   };
 
-  var typePredicate = function (expect) {
+  var isType = function (expect) {
     return function (obj) {
-      return toString(obj) === expect;
+      return type(obj) === expect;
     };
   };
 
-  var isArray = typePredicate('[object Array]');
-  var isDate = typePredicate('[object Date]');
 
-  var isFunction = function (f) {
-    return typeof f === 'function';
-  };
-
-  var isObject = function (o) {
-    return typeof o === 'object';
-  };
-
-  var isString = function (s) {
-    return typeof s === 'string';
-  };
+  var isArray = isType('array');
+  var isDate = isType('date');
+  var isFunction = isType('function');
+  var isObject = isType('object');
+  var isString = isType('string');
+  var isNumber = isType('number');
 
   var isNonEmptyString = function (s) {
     return isString(s) && s.length;
@@ -74,7 +80,9 @@
   ferret.isDate = isDate;
   ferret.isFunction = isFunction;
   ferret.isObject = isObject;
+  ferret.isNumber = isNumber;
   ferret.isNonEmptyString = isNonEmptyString;
+
   ferret.forEach = forEach;
   ferret.noop = noop;
   ferret.clone = clone;

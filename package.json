@@ -2,7 +2,9 @@
   "name": "ferret.js",
   "version": "0.0.1",
   "devDependencies": {
-    "karma": "~0.10"
+    "karma": "~0.10",
+    "grunt": "^0.4.4",
+    "grunt-contrib-concat": "^0.3.0"
   },
   "scripts": {
     "test": "./node_modules/.bin/karma start --single-run --browsers PhantomJS"

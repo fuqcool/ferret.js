@@ -63,7 +63,7 @@
 
     if (isFunction(cb)) {
       forEach(obj, function (value, key) {
-        result[key] = cb.apply(context, value, key, obj);
+        result[key] = cb.call(context, value, key, obj);
       });
     }
 

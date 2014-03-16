@@ -1,4 +1,4 @@
-ferret.module('core.http', function (exports, require, module) {
+ferret.module('core.http', function (require, exports, module) {
   function event(name, options) {
     return function (cb) {
       options[name] = cb;

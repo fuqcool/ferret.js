@@ -34,36 +34,47 @@
     return isString(s) && s.length;
   };
 
-  var eachArray = function (a, cb) {
-    var i;
-
-    for (i = 0; i < a.length; i++) {
-      cb(a[i], i, a);
+  var eachArray = function (a, cb, context) {
+    if (Array.prototype.forEach) {
+      a.forEach(cb, context);
+    } else {
+      for (var i = 0; i < a.length; i++) {
+        cb.call(context, a[i], i, a);
+      }
     }
   };
 
-  var eachObject = function (obj, cb) {
+  var eachObject = function (obj, cb, context) {
     for (var prop in obj) {
       if (obj.hasOwnProperty(prop)) {
-        cb(obj[prop], prop, obj);
+        cb.call(context, obj[prop], prop, obj);
       }
     }
   };
 
-  var forEach = function (obj, cb) {
-    if (!isFunction(cb)) {
-      console.warn('forEach invoked with no iterate function');
-      return;
-    }
+  var map = function (obj, cb, context) {
+    var result;
 
     if (isArray(obj)) {
-      if (isFunction(obj.forEach)) {
-        obj.forEach(cb);
-      } else {
-        eachArray(obj, cb);
-      }
+      result = [];
     } else if (isObject(obj)) {
-      eachObject(obj, cb);
+      result = {};
+    }
+
+    if (isFunction(cb)) {
+      forEach(obj, function (value, key) {
+        result[key] = cb.apply(context, value, key, obj);
+      });
+    }
+
+    return result;
+  };
+
+  var forEach = function (obj, cb, context) {
+    if (isArray(obj)) {
+      eachArray(obj, cb, context);
+    } else if (isObject(obj)) {
+      eachObject(obj, cb, context);
     }
   };
 
@@ -85,6 +96,7 @@
   ferret.type = type;
 
   ferret.forEach = forEach;
+  ferret.map = map;
   ferret.noop = noop;
   ferret.clone = clone;
 }());

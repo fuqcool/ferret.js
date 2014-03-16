@@ -4,7 +4,7 @@
     });
 
     it('should be able to export properties', function () {
-        ferret.module('m', function (exports, require, module) {
+        ferret.module('m', function (require, exports, module) {
             exports.foo = 'bar';
         });
 
@@ -14,7 +14,7 @@
     });
 
     it('should be able to replace exports object', function () {
-        ferret.module('m', function (exports, require, module) {
+        ferret.module('m', function (require, exports, module) {
             module.exports = 'bar';
         });
 
@@ -57,7 +57,7 @@
     });
 
     it('should solve circular dependencies', function () {
-        ferret.module('m1', function (exports, require, module) {
+        ferret.module('m1', function (require, exports, module) {
             var m2 = require('m2');
 
             exports.bar = function () {
@@ -65,7 +65,7 @@
             };
         });
 
-        ferret.module('m2', function (exports, require, module) {
+        ferret.module('m2', function (require, exports, module) {
             require('m1');
 
             exports.foo = jasmine.createSpy('foo');
@@ -81,7 +81,7 @@
     });
 
     it('should return cached module when require the second time', function () {
-        ferret.module('m', function (exports) {
+        ferret.module('m', function (require, exports) {
             exports.a = "b";
         });
 

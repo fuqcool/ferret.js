@@ -1,4 +1,4 @@
-﻿ferret.module('core.event', function (exports, require, module) {
+﻿ferret.module('core.event', function (require, exports, module) {
   var events = {};
 
   function listen(event, cb) {

@@ -2,7 +2,7 @@
   var events = {};
 
   function listen(event, cb) {
-    if (ferret.isNonEmptyString(event)) {
+    if (ferret.isString(event)) {
       if (events[event]) {
         events[event].push(cb);
       } else {
@@ -14,7 +14,7 @@
   }
 
   function trigger(event) {
-    if (ferret.isNonEmptyString(event)) {
+    if (ferret.isString(event)) {
       var args = Array.prototype.slice.call(arguments, 1);
       doTrigger(event, args);
     } else {

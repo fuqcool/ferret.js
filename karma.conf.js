@@ -14,12 +14,7 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      "lib/jQuery/dist/jquery.min.js",
-      "src/module.js",
-      "src/util.js",
-      "src/event.js",
-      "src/console.js",
-      "src/http.js",
+      "dist/ferret.js",
       "spec/*.js"
     ],
 

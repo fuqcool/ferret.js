@@ -1,5 +1,5 @@
 {
-  "name": "ferret.js",
+  "name": "ferret",
   "version": "0.0.1",
   "devDependencies": {
     "karma": "~0.10",

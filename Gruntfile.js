@@ -4,8 +4,8 @@ module.exports = function (grunt) {
     pkg: grunt.file.readJSON('package.json'),
     concat: {
       dist: {
-        src: ['src/module.js', 'src/util.js', 'src/http.js', 'src/event.js', 'src/console.js'],
-        dest: 'bower-ferret/<%= pkg.name %>.js'
+        src: ['src/module.js', 'src/util.js', 'src/event.js', 'src/console.js'],
+        dest: 'dist/<%= pkg.name %>.js'
       }
     }
   });

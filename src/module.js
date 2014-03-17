@@ -74,7 +74,7 @@
 
     var result = [];
     ferret.forEach(list, function (name) {
-      if (ferret.isNonEmptyString(name)) {
+      if (ferret.isString(name)) {
         result.push(require(name));
       }
     });

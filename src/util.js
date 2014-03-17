@@ -29,9 +29,13 @@
   var isObject = isType('object');
   var isString = isType('string');
   var isNumber = isType('number');
-
-  var isNonEmptyString = function (s) {
-    return isString(s) && s.length;
+  var isRegExp = isType('regexp');
+  var isNull = isType('null');
+  var isUndefined = isType('undefined');
+  var isBoolean = isType('boolean');
+  var isNaN = function (n) {
+    // NaN is a number but not equal to itself.
+    return isNumber(n) && n !== n;
   };
 
   var eachArray = function (a, cb, context) {
@@ -84,18 +88,27 @@
     return $.extend({}, obj, true);
   };
 
+  var toArray = function (obj) {
+    return Array.prototype.slice.call(obj);
+  };
+
   var ferret = window.ferret = window.ferret || {};
 
+  ferret.type = type;
   ferret.isArray = isArray;
   ferret.isString = isString;
   ferret.isDate = isDate;
   ferret.isFunction = isFunction;
   ferret.isObject = isObject;
   ferret.isNumber = isNumber;
-  ferret.isNonEmptyString = isNonEmptyString;
-  ferret.type = type;
+  ferret.isRegExp = isRegExp;
+  ferret.isUndefined = isUndefined;
+  ferret.isNull = isNull;
+  ferret.isBoolean = isBoolean;
+  ferret.isNaN = isNaN;
 
-  ferret.forEach = forEach;
+  ferret.forEach = ferret.each = forEach;
+  ferret.toArray = toArray;
   ferret.map = map;
   ferret.noop = noop;
   ferret.clone = clone;

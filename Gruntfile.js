@@ -10,5 +10,7 @@ module.exports = function (grunt) {
     }
   });
 
+  grunt.registerTask('dist', ['concat']);
+
   grunt.loadNpmTasks('grunt-contrib-concat');
 };

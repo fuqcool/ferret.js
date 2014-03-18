@@ -6,8 +6,5 @@
     "node_modules",
     "lib",
     "spec"
-  ],
-  "dependencies": {
-    "jQuery": "latest"
-  }
+  ]
 }

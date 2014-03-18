@@ -177,10 +177,70 @@ describe('util', function () {
 
     it('should be extended by more than one object', function () {
       var obj = {};
-      var result = ferret.extend(obj, { a: 'b', c: 100 }, { foo: 'bar', c: 0 });
+      var result = ferret.extend(
+        obj,
+        { a: 'b', c: 100 },
+        { foo: 'bar', c: 0 }
+      );
 
       expect(result).toBe(obj);
       expect(obj).toEqual({ a: 'b', c: 0, foo: 'bar' });
+    });
+  });
+
+  describe('defaults', function () {
+    it('should have default value', function () {
+      var obj = { a: 'foo', c: null };
+      var d = {
+        a: 'hello',
+        b: 100,
+        c: 'bar'
+      };
+
+      var result = ferret.defaults(obj, d);
+
+      expect(result).toBe(obj);
+      expect(obj.a).toBe('foo');
+      expect(obj.b).toBe(100);
+      expect(obj.c).toBe('bar');
+    });
+
+    it('should have multiple defaults', function () {
+      var obj = { a: 'foo', c: null };
+      var d1 = {
+        a: 'hello',
+        b: 100
+      };
+
+      var d2 = {
+        c: 'bar',
+        b: 200
+      };
+
+      var result = ferret.defaults(obj, d1, d2);
+
+      expect(result).toBe(obj);
+      expect(obj.a).toBe('foo');
+      expect(obj.b).toBe(100);
+      expect(obj.c).toBe('bar');
+    });
+  });
+
+  describe('bind', function () {
+    it('should bind context to particular object', function () {
+      var context = { a: 5, b: 10 };
+      var fn = function (p1, p2) {
+        expect(this).toBe(context);
+        expect(p1).toBe('param1');
+        expect(p2).toBe('param2');
+
+        return this.a + this.b;
+      };
+
+      fn = ferret.bind(fn, context, 'param1');
+
+      // will not change the context
+      fn.call({}, 'param2');
     });
   });
 });

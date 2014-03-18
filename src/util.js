@@ -108,10 +108,32 @@
     return dest;
   };
 
+  var defaults = function (obj) {
+    var params = toArray(arguments).slice(1);
+
+    forEach(params, function (param) {
+      forEach(param, function (v, k) {
+        if (obj[k] == null) {
+          obj[k] = v;
+        }
+      });
+    });
+
+    return obj;
+  };
+
   var toArray = function (obj) {
     return Array.prototype.slice.call(obj);
   };
 
+
+  var bind = function (fn, context) {
+    var args = toArray(arguments).slice(2);
+
+    return function () {
+      fn.apply(context, args.concat(toArray(arguments)));
+    };
+  };
 
   var ferret = window.ferret = window.ferret || {};
 
@@ -134,4 +156,6 @@
   ferret.noop = noop;
   ferret.clone = clone;
   ferret.extend = extend;
+  ferret.defaults = defaults;
+  ferret.bind = bind;
 }());

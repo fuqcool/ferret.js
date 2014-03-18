@@ -22,11 +22,12 @@
     };
   };
 
-
   var isArray = isType('array');
   var isDate = isType('date');
   var isFunction = isType('function');
-  var isObject = isType('object');
+  var isObject = function (o) {
+    return o !== null && (typeof o === 'object' || typeof o === 'function');
+  };
   var isString = isType('string');
   var isNumber = isType('number');
   var isRegExp = isType('regexp');
@@ -85,12 +86,32 @@
   var noop = function () {};
 
   var clone = function (obj) {
-    return $.extend({}, obj, true);
+    if (!isArray(obj) && !isObject(obj)) {
+      console.log(obj);
+      return obj;
+    }
+
+    return map(obj, function (v, k) {
+      return v;
+    });
+  };
+
+  var extend = function (dest) {
+    var srcs = toArray(arguments).slice(1);
+
+    forEach(srcs, function (src) {
+      forEach(src, function (v, k) {
+        dest[k] = v;
+      });
+    });
+
+    return dest;
   };
 
   var toArray = function (obj) {
     return Array.prototype.slice.call(obj);
   };
+
 
   var ferret = window.ferret = window.ferret || {};
 
@@ -112,4 +133,5 @@
   ferret.map = map;
   ferret.noop = noop;
   ferret.clone = clone;
+  ferret.extend = extend;
 }());
